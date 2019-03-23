@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="Entities">
+    <EntitySetMapping Name="fcAccounts">
+      <EntityTypeMapping TypeName="Model.fcAccount">
+        <MappingFragment StoreEntitySet="fcAccount">
+          <ScalarProperty Name="AccountID" ColumnName="AccountID" />
+          <ScalarProperty Name="PK" ColumnName="PK" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="fcUsers">
+      <EntityTypeMapping TypeName="Model.fcUser">
+        <MappingFragment StoreEntitySet="fcUser">
+          <ScalarProperty Name="PK" ColumnName="PK" />
+          <ScalarProperty Name="GoogleID" ColumnName="GoogleID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="fcUserAccounts">
+      <EntityTypeMapping TypeName="Model.fcUserAccount">
+        <MappingFragment StoreEntitySet="fcUserAccount">
+          <ScalarProperty Name="PK" ColumnName="PK" />
+          <ScalarProperty Name="UserFK" ColumnName="UserFK" />
+          <ScalarProperty Name="AccountFK" ColumnName="AccountFK" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="fcViews">
+      <EntityTypeMapping TypeName="Model.fcView">
+        <MappingFragment StoreEntitySet="fcView">
+          <ScalarProperty Name="PK" ColumnName="PK" />
+          <ScalarProperty Name="PageFK" ColumnName="PageFK" />
+          <ScalarProperty Name="IP" ColumnName="IP" />
+          <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+          <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+          <ScalarProperty Name="Country" ColumnName="Country" />
+          <ScalarProperty Name="Region" ColumnName="Region" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="Browser" ColumnName="Browser" />
+          <ScalarProperty Name="Desktop" ColumnName="Desktop" />
+          <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="fcWebpages">
+      <EntityTypeMapping TypeName="Model.fcWebpage">
+        <MappingFragment StoreEntitySet="fcWebpage">
+          <ScalarProperty Name="PK" ColumnName="PK" />
+          <ScalarProperty Name="AccountFK" ColumnName="AccountFK" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

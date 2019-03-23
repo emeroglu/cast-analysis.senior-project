@@ -1,0 +1,346 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="fcAccount">
+          <Key>
+            <PropertyRef Name="PK" />
+          </Key>
+          <Property Name="PK" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AccountID" Type="varchar" MaxLength="50" />
+          <Property Name="Name" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="fcUser">
+          <Key>
+            <PropertyRef Name="PK" />
+          </Key>
+          <Property Name="PK" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="GoogleID" Type="varchar" MaxLength="25" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+          <Property Name="Email" Type="varchar" MaxLength="1000" />
+        </EntityType>
+        <EntityType Name="fcUserAccount">
+          <Key>
+            <PropertyRef Name="PK" />
+          </Key>
+          <Property Name="PK" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserFK" Type="int" />
+          <Property Name="AccountFK" Type="int" />
+        </EntityType>
+        <EntityType Name="fcView">
+          <Key>
+            <PropertyRef Name="PK" />
+          </Key>
+          <Property Name="PK" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PageFK" Type="int" Nullable="false" />
+          <Property Name="IP" Type="varchar" MaxLength="25" />
+          <Property Name="Latitude" Type="varchar" MaxLength="25" />
+          <Property Name="Longitude" Type="varchar" MaxLength="25" />
+          <Property Name="Country" Type="varchar" MaxLength="100" />
+          <Property Name="Region" Type="varchar" MaxLength="100" />
+          <Property Name="City" Type="varchar" MaxLength="100" />
+          <Property Name="Browser" Type="varchar" MaxLength="50" />
+          <Property Name="Desktop" Type="bit" Nullable="false" />
+          <Property Name="Mobile" Type="bit" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="fcWebpage">
+          <Key>
+            <PropertyRef Name="PK" />
+          </Key>
+          <Property Name="PK" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AccountFK" Type="int" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK__fcUserAcc__Accou__54AE5AE8">
+          <End Role="fcAccount" Type="Self.fcAccount" Multiplicity="0..1" />
+          <End Role="fcUserAccount" Type="Self.fcUserAccount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fcAccount">
+              <PropertyRef Name="PK" />
+            </Principal>
+            <Dependent Role="fcUserAccount">
+              <PropertyRef Name="AccountFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__fcUserAcc__UserF__53BA36AF">
+          <End Role="fcUser" Type="Self.fcUser" Multiplicity="0..1" />
+          <End Role="fcUserAccount" Type="Self.fcUserAccount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fcUser">
+              <PropertyRef Name="PK" />
+            </Principal>
+            <Dependent Role="fcUserAccount">
+              <PropertyRef Name="UserFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__fcView__PageFK__5A67343E">
+          <End Role="fcWebpage" Type="Self.fcWebpage" Multiplicity="1" />
+          <End Role="fcView" Type="Self.fcView" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fcWebpage">
+              <PropertyRef Name="PK" />
+            </Principal>
+            <Dependent Role="fcView">
+              <PropertyRef Name="PageFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__fcWebpage__Accou__578AC793">
+          <End Role="fcAccount" Type="Self.fcAccount" Multiplicity="0..1" />
+          <End Role="fcWebpage" Type="Self.fcWebpage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fcAccount">
+              <PropertyRef Name="PK" />
+            </Principal>
+            <Dependent Role="fcWebpage">
+              <PropertyRef Name="AccountFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ModelStoreContainer">
+          <EntitySet Name="fcAccount" EntityType="Self.fcAccount" Schema="emeroglu" store:Type="Tables" />
+          <EntitySet Name="fcUser" EntityType="Self.fcUser" Schema="emeroglu" store:Type="Tables" />
+          <EntitySet Name="fcUserAccount" EntityType="Self.fcUserAccount" Schema="emeroglu" store:Type="Tables" />
+          <EntitySet Name="fcView" EntityType="Self.fcView" Schema="emeroglu" store:Type="Tables" />
+          <EntitySet Name="fcWebpage" EntityType="Self.fcWebpage" Schema="emeroglu" store:Type="Tables" />
+          <AssociationSet Name="FK__fcUserAcc__Accou__54AE5AE8" Association="Self.FK__fcUserAcc__Accou__54AE5AE8">
+            <End Role="fcAccount" EntitySet="fcAccount" />
+            <End Role="fcUserAccount" EntitySet="fcUserAccount" />
+          </AssociationSet>
+          <AssociationSet Name="FK__fcUserAcc__UserF__53BA36AF" Association="Self.FK__fcUserAcc__UserF__53BA36AF">
+            <End Role="fcUser" EntitySet="fcUser" />
+            <End Role="fcUserAccount" EntitySet="fcUserAccount" />
+          </AssociationSet>
+          <AssociationSet Name="FK__fcView__PageFK__5A67343E" Association="Self.FK__fcView__PageFK__5A67343E">
+            <End Role="fcWebpage" EntitySet="fcWebpage" />
+            <End Role="fcView" EntitySet="fcView" />
+          </AssociationSet>
+          <AssociationSet Name="FK__fcWebpage__Accou__578AC793" Association="Self.FK__fcWebpage__Accou__578AC793">
+            <End Role="fcAccount" EntitySet="fcAccount" />
+            <End Role="fcWebpage" EntitySet="fcWebpage" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="fcAccount">
+          <Key>
+            <PropertyRef Name="PK" />
+          </Key>
+          <Property Name="PK" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="fcUserAccounts" Relationship="Self.FK__fcUserAcc__Accou__11EC7352" FromRole="fcAccount" ToRole="fcUserAccount" />
+          <NavigationProperty Name="fcWebpages" Relationship="Self.FK__fcWebpage__Accou__14C8DFFD" FromRole="fcAccount" ToRole="fcWebpage" />
+          <Property Name="AccountID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="fcUser">
+          <Key>
+            <PropertyRef Name="PK" />
+          </Key>
+          <Property Name="PK" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GoogleID" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="fcUserAccounts" Relationship="Self.FK__fcUserAcc__UserF__10F84F19" FromRole="fcUser" ToRole="fcUserAccount" />
+        </EntityType>
+        <EntityType Name="fcUserAccount">
+          <Key>
+            <PropertyRef Name="PK" />
+          </Key>
+          <Property Name="PK" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserFK" Type="Int32" />
+          <Property Name="AccountFK" Type="Int32" />
+          <NavigationProperty Name="fcAccount" Relationship="Self.FK__fcUserAcc__Accou__11EC7352" FromRole="fcUserAccount" ToRole="fcAccount" />
+          <NavigationProperty Name="fcUser" Relationship="Self.FK__fcUserAcc__UserF__10F84F19" FromRole="fcUserAccount" ToRole="fcUser" />
+        </EntityType>
+        <EntityType Name="fcView">
+          <Key>
+            <PropertyRef Name="PK" />
+          </Key>
+          <Property Name="PK" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PageFK" Type="Int32" Nullable="false" />
+          <Property Name="IP" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Latitude" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Longitude" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="Country" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Region" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="City" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="Browser" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Desktop" Type="Boolean" Nullable="false" />
+          <Property Name="Mobile" Type="Boolean" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="fcWebpage" Relationship="Self.FK__fcView__PageFK__17A54CA8" FromRole="fcView" ToRole="fcWebpage" />
+        </EntityType>
+        <EntityType Name="fcWebpage">
+          <Key>
+            <PropertyRef Name="PK" />
+          </Key>
+          <Property Name="PK" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AccountFK" Type="Int32" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="fcAccount" Relationship="Self.FK__fcWebpage__Accou__14C8DFFD" FromRole="fcWebpage" ToRole="fcAccount" />
+          <NavigationProperty Name="fcViews" Relationship="Self.FK__fcView__PageFK__17A54CA8" FromRole="fcWebpage" ToRole="fcView" />
+        </EntityType>
+        <Association Name="FK__fcUserAcc__Accou__11EC7352">
+          <End Role="fcAccount" Type="Self.fcAccount" Multiplicity="0..1" />
+          <End Role="fcUserAccount" Type="Self.fcUserAccount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fcAccount">
+              <PropertyRef Name="PK" />
+            </Principal>
+            <Dependent Role="fcUserAccount">
+              <PropertyRef Name="AccountFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__fcWebpage__Accou__14C8DFFD">
+          <End Role="fcAccount" Type="Self.fcAccount" Multiplicity="0..1" />
+          <End Role="fcWebpage" Type="Self.fcWebpage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fcAccount">
+              <PropertyRef Name="PK" />
+            </Principal>
+            <Dependent Role="fcWebpage">
+              <PropertyRef Name="AccountFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__fcUserAcc__UserF__10F84F19">
+          <End Role="fcUser" Type="Self.fcUser" Multiplicity="0..1" />
+          <End Role="fcUserAccount" Type="Self.fcUserAccount" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fcUser">
+              <PropertyRef Name="PK" />
+            </Principal>
+            <Dependent Role="fcUserAccount">
+              <PropertyRef Name="UserFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__fcView__PageFK__17A54CA8">
+          <End Role="fcWebpage" Type="Self.fcWebpage" Multiplicity="1" />
+          <End Role="fcView" Type="Self.fcView" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="fcWebpage">
+              <PropertyRef Name="PK" />
+            </Principal>
+            <Dependent Role="fcView">
+              <PropertyRef Name="PageFK" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="fcAccounts" EntityType="Self.fcAccount" />
+          <EntitySet Name="fcUsers" EntityType="Self.fcUser" />
+          <EntitySet Name="fcUserAccounts" EntityType="Self.fcUserAccount" />
+          <EntitySet Name="fcViews" EntityType="Self.fcView" />
+          <EntitySet Name="fcWebpages" EntityType="Self.fcWebpage" />
+          <AssociationSet Name="FK__fcUserAcc__Accou__11EC7352" Association="Self.FK__fcUserAcc__Accou__11EC7352">
+            <End Role="fcAccount" EntitySet="fcAccounts" />
+            <End Role="fcUserAccount" EntitySet="fcUserAccounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__fcWebpage__Accou__14C8DFFD" Association="Self.FK__fcWebpage__Accou__14C8DFFD">
+            <End Role="fcAccount" EntitySet="fcAccounts" />
+            <End Role="fcWebpage" EntitySet="fcWebpages" />
+          </AssociationSet>
+          <AssociationSet Name="FK__fcUserAcc__UserF__10F84F19" Association="Self.FK__fcUserAcc__UserF__10F84F19">
+            <End Role="fcUser" EntitySet="fcUsers" />
+            <End Role="fcUserAccount" EntitySet="fcUserAccounts" />
+          </AssociationSet>
+          <AssociationSet Name="FK__fcView__PageFK__17A54CA8" Association="Self.FK__fcView__PageFK__17A54CA8">
+            <End Role="fcWebpage" EntitySet="fcWebpages" />
+            <End Role="fcView" EntitySet="fcViews" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="fcAccounts">
+            <EntityTypeMapping TypeName="Model.fcAccount">
+              <MappingFragment StoreEntitySet="fcAccount">
+                <ScalarProperty Name="AccountID" ColumnName="AccountID" />
+                <ScalarProperty Name="PK" ColumnName="PK" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="fcUsers">
+            <EntityTypeMapping TypeName="Model.fcUser">
+              <MappingFragment StoreEntitySet="fcUser">
+                <ScalarProperty Name="PK" ColumnName="PK" />
+                <ScalarProperty Name="GoogleID" ColumnName="GoogleID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="fcUserAccounts">
+            <EntityTypeMapping TypeName="Model.fcUserAccount">
+              <MappingFragment StoreEntitySet="fcUserAccount">
+                <ScalarProperty Name="PK" ColumnName="PK" />
+                <ScalarProperty Name="UserFK" ColumnName="UserFK" />
+                <ScalarProperty Name="AccountFK" ColumnName="AccountFK" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="fcViews">
+            <EntityTypeMapping TypeName="Model.fcView">
+              <MappingFragment StoreEntitySet="fcView">
+                <ScalarProperty Name="PK" ColumnName="PK" />
+                <ScalarProperty Name="PageFK" ColumnName="PageFK" />
+                <ScalarProperty Name="IP" ColumnName="IP" />
+                <ScalarProperty Name="Latitude" ColumnName="Latitude" />
+                <ScalarProperty Name="Longitude" ColumnName="Longitude" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="Region" ColumnName="Region" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Browser" ColumnName="Browser" />
+                <ScalarProperty Name="Desktop" ColumnName="Desktop" />
+                <ScalarProperty Name="Mobile" ColumnName="Mobile" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="fcWebpages">
+            <EntityTypeMapping TypeName="Model.fcWebpage">
+              <MappingFragment StoreEntitySet="fcWebpage">
+                <ScalarProperty Name="PK" ColumnName="PK" />
+                <ScalarProperty Name="AccountFK" ColumnName="AccountFK" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

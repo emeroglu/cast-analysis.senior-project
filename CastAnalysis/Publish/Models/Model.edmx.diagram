@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="c0fb02704e53429e8b3400052a00febb" Name="Diagram1">
+        <EntityTypeShape EntityType="Model.fcAccount" Width="1.5" PointX="0.75" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.fcUser" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.fcUserAccount" Width="1.5" PointX="3" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.fcView" Width="1.5" PointX="5.25" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.fcWebpage" Width="1.5" PointX="3" PointY="6.5" IsExpanded="true" />
+        <AssociationConnector Association="Model.FK__fcUserAcc__Accou__11EC7352" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__fcWebpage__Accou__14C8DFFD" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__fcUserAcc__UserF__10F84F19" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__fcView__PageFK__17A54CA8" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
